@@ -82,8 +82,6 @@ def main(grid: Grid, context: Context) -> None:
 
     # Compose the results dictionary
     results = {
-        "saved_at": datetime.utcnow().isoformat() + "Z",
-        "final_model_path": os.path.abspath(f"{test_name}_model.pt"),
         "run_config": {
             "fraction_train": fraction_train,
             "num_server_rounds": num_rounds,
@@ -97,7 +95,7 @@ def main(grid: Grid, context: Context) -> None:
         "result_summary": {},
     }
 
-    for attr in ("history", "metrics", "loss", "num_rounds", "num_examples", "details"):
+    for attr in ("metrics", "loss", "num_rounds", "num_examples"):
         if hasattr(result, attr):
             try:
                 results["result_summary"][attr] = make_serializable(
